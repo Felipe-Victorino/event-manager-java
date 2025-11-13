@@ -1,11 +1,45 @@
 package util.interval;
 
+import exceptions.IntervalTreeOverlap;
+
 import java.util.Date;
 
 public class DateIntervalTree {
 	// if I extend the Binary Tree Class will the node be overwritten by this one or will I have two nodes
 
 	Node root;
+
+	public void add(DateInterval i){
+		if(isOverlapping(overlapSearch(this.root, i), i)){
+			throw new IntervalTreeOverlap("Overlap");
+		} else {
+			add(this.root, i);
+		}
+	}
+
+	public void remove(DateInterval i){
+		if(isOverlapping(overlapSearch(this.root, i), i)){
+			throw new IntervalTreeOverlap("Overlap");
+		} else {
+			remove(this.root, i);
+		}
+	}
+
+	private boolean isOverlapping(DateInterval i1, DateInterval i2) {
+		return i1.low.before(i2.high) && i2.low.before(i1.high);
+	}
+
+	private DateInterval overlapSearch(Node root, DateInterval i) {
+		if (root == null) return null;
+		if (isOverlapping(root.interval, i)){
+			return root.interval;
+		};
+
+		if (root.left != null && root.left.max.after( i.low))
+			return overlapSearch(root.left, i);
+
+		return overlapSearch(root.right, i);
+	}
 
 	private Node add(Node node, DateInterval value){
 		if(node == null){
