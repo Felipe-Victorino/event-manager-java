@@ -3,7 +3,9 @@ package model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,12 +17,16 @@ public class Registry {
 	private long id;
 
 	@ManyToOne
-	Participant participant;
+	@JoinColumn(name = "participant_id")
+	private Participant participant;
 
 	@ManyToOne
-	Session session;
+	@JoinColumn(name = "session_id")
+	private Session session;
 
-	// Feedback feedback;
+	@OneToOne
+	@JoinColumn(name = "feedback_id")
+	private Feedback feedback;
 
 
 	public long getId() {return this.id;}

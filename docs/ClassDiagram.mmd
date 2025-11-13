@@ -9,6 +9,7 @@ class Room{
 class Session{
     -long id
     -DateTime datetime
+    -Score score
     -Room room
     -LinkedList participants
 
@@ -18,21 +19,19 @@ class Session{
 class RegisterCard{
     -long id
 }
+class Person{
 
-class Participant{
-    -long id
-    -int avaliacao
     -String nome
     -String cpf
-
+}
+class Participant{
+    -long id
+    -string Cpf
     - Card createCard()
 }
 
 class Speaker{
     -long id
-    -String nome
-    -String cpf
-
     - Card createCard()
 }
 
@@ -45,6 +44,7 @@ class Registry{
 
 class Event{
     -long id
+    -String name
     -Date date
 }
 
@@ -57,13 +57,16 @@ class Feedback{
 
 %% Heranças
 
+Speaker --|> Person
+Participant --|> Person
 
 Registry "0.*" --o "1.1" Participant
 Registry "1.*" --o "1.1" Session
+Registry "1.1" *-- "0.1" RegisterCard
 
 Session "1.1" *-- "1.*" Speaker
-
+Session "1.1" *-- "0.*" Participant
 Room "1.1" --* "0.1" Session
 Session "1.*" --* "1.1" Event
-
-Session "1.1" o-- "1.1" Feedback
+Session "1.1" --o "1.1" Feedback
+Feedback "1.1" --* "1.1" Registry
