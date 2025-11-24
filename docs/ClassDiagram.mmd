@@ -9,6 +9,8 @@ class Room{
 class Session{
     -long id
     -DateTime datetime
+    -int finalCapacity
+    -int predictedCapacity
     -Score score
     -Room room
     -LinkedList participants
@@ -51,7 +53,6 @@ class Event{
 class Feedback{
     -long id
     -int finalCapacity
-    -int predictedCapacity
     -double rating
 }
 
@@ -65,8 +66,7 @@ Registry "1.*" --o "1.1" Session
 Registry "1.1" *-- "0.1" RegisterCard
 
 Session "1.1" *-- "1.*" Speaker
-Session "1.1" *-- "0.*" Participant
 Room "1.1" --* "0.1" Session
 Session "1.*" --* "1.1" Event
-Session "1.1" --o "1.1" Feedback
+
 Feedback "1.1" --* "1.1" Registry

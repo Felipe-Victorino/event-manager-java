@@ -22,6 +22,12 @@ public class Speaker{
 
     }
 
+	@Override
+	public String toString(){
+		return getNome() + '\n' +
+				getCpf() + '\n';
+	}
+
     public long getId() {return this.id;}
     public String getNome() {return this.name;}
     public String getCpf() {return this.cpf;}

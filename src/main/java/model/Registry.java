@@ -32,7 +32,9 @@ public class Registry {
 	public long getId() {return this.id;}
 	public Participant getParticipant() {return this.participant;}
 	public Session getSession() {return this.session;}
+	public Feedback getFeedback(){return this.feedback;}
 
 	public void setParticipant(Participant participant) {this.participant = participant;}
 	public void setSession(Session session) {this.session = session;}
+	public void setFeedback(Feedback feedback) {this.feedback = feedback;}
 }
