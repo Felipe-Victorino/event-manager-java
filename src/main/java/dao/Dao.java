@@ -48,6 +48,8 @@ public abstract class Dao<T> implements InterfaceDao<T>{
 			em.close();
 		}
 	};
+
+	@SuppressWarnings("unchecked")
 	public List<T> searchAll(){
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createQuery("from " + entityClass.getSimpleName());
