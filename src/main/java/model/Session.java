@@ -1,10 +1,10 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,16 +20,25 @@ public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "session_id")
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-	private Date startDate;
+	private Date date;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date endDate;
+	@Temporal(TemporalType.TIME)
+	private Date startTime;
+	@Temporal(TemporalType.TIME)
+	private Date endTime;
 
     @OneToOne
 	private Room room;
+
+	private int predictedCapacity;
+
+	int totalScore;
+
+	double finalScore;
 
 	@OneToMany(mappedBy = "session")
 	private List<Participant> participants;
@@ -37,11 +46,23 @@ public class Session {
     public Session(){}
 
     public long getId(){return this.id;}
-    public Date getStartDate(){return this.startDate;}
+    public Date getDate(){return this.date;}
     public Room getRoom(){return this.room;}
+    public void setDate(Date date){this.date = date;}
+	public Date getEndTime() { return endTime;}
+	public void setEndTime(Date endTime) {this.endTime = endTime;}
+	public void setRoom(Room room){this.room = room;}
+	public Date getStartTime() {return startTime;}
+	public void setStartTime(Date startTime) {this.startTime = startTime;}
 
-    public void setStartDate(Date date){this.startDate = date;}
-    public void setRoom(Room room){this.room = room;}
+	public int getPredictedCapacity() {
+		return predictedCapacity;
+	}
 
+	public void setPredictedCapacity(int predictedCapacity) {
+		this.predictedCapacity = predictedCapacity;
+	}
 
+	public List<Participant> getParticipants() {return participants;}
+	public void setParticipants(List<Participant> participants) {this.participants = participants;}
 }

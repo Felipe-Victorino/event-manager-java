@@ -31,6 +31,13 @@ public class Room {
 
     }
 
+	@Override
+	public String toString(){
+		return getName() + '\n' +
+				getDescription() + '\n' +
+				getMaxCapacity();
+	}
+
     public long getId() {return id;}
     public String getName() {return name;}
     public String getDescription() {return description;}
