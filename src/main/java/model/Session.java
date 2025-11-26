@@ -41,7 +41,7 @@ public class Session {
 	double finalScore;
 
 	@OneToMany(mappedBy = "session")
-	private List<Participant> participants;
+	private List<Registry> participants;
 
     public Session(){}
 
@@ -63,6 +63,6 @@ public class Session {
 		this.predictedCapacity = predictedCapacity;
 	}
 
-	public List<Participant> getParticipants() {return participants;}
-	public void setParticipants(List<Participant> participants) {this.participants = participants;}
+	public List<Registry> getParticipants() {return participants;}
+	public void setParticipants(List<Registry> participants) {this.participants = participants;}
 }

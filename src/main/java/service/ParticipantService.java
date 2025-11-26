@@ -13,13 +13,13 @@ import java.util.Scanner;
 
 public class ParticipantService {
 
-	private ParticipantDao dao = new ParticipantDao();
-	Scanner sc = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in);
 
 	public Participant createParticipant(String nome, String cpf){
 		Participant participant = new Participant();
 		participant.setNome(nome);
 		participant.setCpf(cpf);
+		ParticipantDao dao = new ParticipantDao();
 		dao.insert(participant);
 		return participant;
 	}
@@ -48,6 +48,7 @@ public class ParticipantService {
 
 
 	private Participant searchParticipantByCpf(String participantCpf){
+		ParticipantDao dao = new ParticipantDao();
 		List<Participant> participants = dao.searchAll();
 
 		for(Participant p : participants){

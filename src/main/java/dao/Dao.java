@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class Dao<T> implements InterfaceDao<T>{
 
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenciaPU");
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenciaPU");
 
 	Class<T> entityClass;
 

@@ -2,6 +2,7 @@ package service;
 
 import dao.SessionDao;
 import model.Participant;
+import model.Registry;
 import model.Room;
 import model.Session;
 import util.interval.DateInterval;
@@ -20,12 +21,12 @@ public class SessionService {
 		session.setStartTime(startTime);
 		session.setEndTime(endTime);
 		session.setRoom(room);
-		session.setParticipants(new ArrayList<Participant>());
+		session.setParticipants(new ArrayList<Registry>());
 		return session;
 	}
 
-	public void confirmPresence(Session session, Participant participant){
-		session.getParticipants().add(participant);
+	public void confirmPresence(Registry registry, Session session){
+		session.getParticipants().add(registry);
 	}
 
 	public DateInterval getSessionTimeInterval(Session session){
@@ -35,8 +36,8 @@ public class SessionService {
 	public List<Session> getAllSessionsWPart(Participant participant){
 		List<Session> thisPartList = new ArrayList<>();
 		for(Session s : getAllSessions()){
-			for(Participant p : s.getParticipants()){
-				if (p.equals(participant)){
+			for(Registry p : s.getParticipants()){
+				if (p.getParticipant().equals(participant)){
 					thisPartList.add(s);
 				}
 			}

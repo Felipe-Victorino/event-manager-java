@@ -5,13 +5,12 @@ import exceptions.IntervalTreeOverlap;
 import java.util.Date;
 
 public class DateIntervalTree {
-	// if I extend the Binary Tree Class will the node be overwritten by this one or will I have two nodes
 
 	Node root;
 
 	public void add(DateInterval i){
 		if(isOverlapping(overlapSearch(this.root, i), i)){
-			throw new IntervalTreeOverlap("Overlap");
+			throw new IntervalTreeOverlap("Service Rule Broken: Tree shouldn't have overlapping dates");
 		} else {
 			add(this.root, i);
 		}
@@ -19,7 +18,7 @@ public class DateIntervalTree {
 
 	public void remove(DateInterval i){
 		if(isOverlapping(overlapSearch(this.root, i), i)){
-			throw new IntervalTreeOverlap("Overlap");
+			throw new IntervalTreeOverlap("Service Rule Broken: Tree shouldn't have overlapping dates");
 		} else {
 			remove(this.root, i);
 		}
@@ -41,15 +40,15 @@ public class DateIntervalTree {
 		return overlapSearch(root.right, i);
 	}
 
-	private Node add(Node node, DateInterval value){
-		if(node == null){
-			node = new Node(value);
-		} else if (value.low.before(node.interval.low)){
-			node.left = add(node.left, value);
+	private Node add(Node root, DateInterval value){
+		if(root == null){
+			root = new Node(value);
+		} else if (value.low.before(root.interval.low)){
+			root.left = add(root.left, value);
 		} else {
-			node.right = add(node.right, value);
+			root.right = add(root.right, value);
 		}
-		return node;
+		return rebalance(root);
 	}
 	
 	private Node remove(Node root, DateInterval value){
@@ -75,7 +74,8 @@ public class DateIntervalTree {
 			root.interval = min.interval;
 			root.right = remove (root, min.interval);
 		}
-		return root;
+
+		return rebalance(root);
 	}
 
 	private boolean isLeaf(Node root){
@@ -88,6 +88,61 @@ public class DateIntervalTree {
 			aux = aux.left;
 		}
 		return aux;
+	}
+
+	private int height(Node root){
+		if (root == null) return -1;
+
+		int lHeight, rHeight;
+		lHeight = height(root.left);
+		rHeight = height(root.right);
+
+		return Math.max(lHeight, rHeight) + 1;
+	}
+
+	private void updateHeight(Node root){
+		root.height = height(root);
+	}
+
+	private int checkBalance (Node root){
+		return height(root.left) - height(root.right);
+	}
+
+	private Node rebalance(Node root){
+		int fb = checkBalance(root);
+		if(fb < -1 && checkBalance(root.right) <= 0){
+			return rotateLeft(root);
+		}
+		if (fb > 1 && checkBalance(root.left) >= 0){
+			return rotateRight(root);
+		}
+		if (fb < -1 && checkBalance(root.right) > 0){
+			root.right = rotateRight(root.right);
+			return rotateLeft(root);
+		}
+		if(fb > 1 && checkBalance(root.left) < 0){
+			root.left = rotateLeft(root.left);
+			return rotateRight(root);
+		}
+		return root;
+	}
+
+	private Node rotateLeft(Node root){
+		Node newRoot = root.right;
+		root.right = newRoot.left;
+		newRoot.left = root;
+		updateHeight(root);
+		updateHeight(newRoot);
+		return newRoot;
+	}
+
+	private Node rotateRight(Node root){
+		Node newRoot = root.left;
+		root.left = newRoot.right;
+		newRoot.right = root;
+		updateHeight(root);
+		updateHeight(newRoot);
+		return newRoot;
 	}
 	
 	private boolean TreeSearch(DateInterval value) {
@@ -115,6 +170,7 @@ public class DateIntervalTree {
 		DateInterval interval;
 		Date max;
 		Node left, right;
+		int height;
 
 
 		public Node(DateInterval value){
