@@ -1,12 +1,10 @@
 package app;
 
-import view.MainPage;
-import view.View;
+import view.ViewCLI;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-		View view = new View();
-		view.startView();
+		ViewCLI view = new ViewCLI();
+		view.start();
     }
 }

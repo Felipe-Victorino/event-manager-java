@@ -18,8 +18,7 @@ Salas também serão registradas e cadastradas no banco de dados
 Relatórios não serão persistidos em base de dados, mas a geração de um documento de texto com as informações será gerado com base nas avaliações do banco.
 
 ## Regras de Negócio e Funcionalidades
-- O sistema utilizará uma interface gráfica com Swing.
-- A interface gráfica terá
+
 - Para verificar a disponibilidade de tempo e horário diário, uma árvore de intervalo será utilizada.
 
 - A descrição dos eventos terá um limite de 250 caracteres.
