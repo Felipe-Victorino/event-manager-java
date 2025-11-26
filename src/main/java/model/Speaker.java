@@ -8,15 +8,7 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Table (name = "speaker")
-public class Speaker{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String name;
-
-    private String cpf;
+public class Speaker extends Person{
 
     public Speaker(){
 

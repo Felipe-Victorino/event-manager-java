@@ -62,7 +62,7 @@ public class ViewCLI {
 					loop = false;
 					text.printMenu();
 					break;
-				case 1:
+				case 1: //Show events
 				case 2:
 				default:
 					System.out.println("Invalid Option, please select a possible value.");
@@ -74,6 +74,23 @@ public class ViewCLI {
 	private void subMenuRegisterSwitch(){
 		boolean loop = true;
 		this.text.subMenuRegistros();
+		while(loop){
+			int choice = prompt();
+
+			switch (choice){
+				case 0:
+					loop = false;
+					text.printMenu();
+					break;
+				case 1: //events
+				case 2: //sessions
+				case 3: //rooms
+				case 4: //users
+				default:
+					System.out.println("Invalid Option, please select a possible value.");
+					break;
+			}
+		}
 	}
 
 	private void subMenuUsersSwitch(){
@@ -90,7 +107,7 @@ public class ViewCLI {
 				case 1:
 					new ParticipantService().search();
 					break;
-				case 2:
+				case 2: //search speakers
 				default:
 					System.out.println("Invalid Option, please select a possible value.");
 					break;

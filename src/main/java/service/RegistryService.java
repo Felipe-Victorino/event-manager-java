@@ -28,7 +28,7 @@ public class RegistryService {
 
 		newReg.setParticipant(part);
 		newReg.setSession(sess);
-		newReg.setFeedback();
+
 
 		dao.insert(newReg);
 	}

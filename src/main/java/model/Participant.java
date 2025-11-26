@@ -18,15 +18,11 @@ public class Participant extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "participant_id")
     private long id;
 
 	@Transient //Contrário de persistente, não é colocado no banco de dados
 	private DateIntervalTree intervalTree;
 
-	@ManyToOne
-	@JoinColumn()
-	private Session session;
 
 	public Participant(){
 
