@@ -16,14 +16,14 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "event_id")
-	long id;
+	private long id;
 
-	String name;
+	private String name;
 
 	@Temporal(TemporalType.DATE)
-	Date startDate;
+	private Date startDate;
 	@Temporal(TemporalType.DATE)
-	Date endDate;
+	private Date endDate;
 
 
 	@Override
