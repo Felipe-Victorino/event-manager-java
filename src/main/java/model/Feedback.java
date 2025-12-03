@@ -1,11 +1,14 @@
 package model;
 
+import service.SessionService;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity(name = "feedback")
 public class Feedback {
@@ -19,6 +22,9 @@ public class Feedback {
 	private int predictedCapacity;
 
 	private double score;
+
+	@OneToOne
+	private Session session;
 
 	public Feedback(){
 
@@ -34,6 +40,14 @@ public class Feedback {
 
 	public int getPredictedCapacity() {
 		return predictedCapacity;
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
 	public double getScore() {

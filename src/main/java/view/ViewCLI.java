@@ -1,13 +1,17 @@
 package view;
 
-import service.ParticipantService;
+import controller.EventController;
+import controller.ParticipantController;
+import controller.SpeakerController;
+import service.EventService;
+
 
 import java.util.Scanner;
 
 public class ViewCLI {
 
-	private DisplayText text = new DisplayText();
-	private Scanner sc = new Scanner(System.in);
+	private final DisplayText text = new DisplayText();
+	private final Scanner sc = new Scanner(System.in);
 
 	public void start(){
 		this.text.printTitle();
@@ -63,6 +67,8 @@ public class ViewCLI {
 					text.printMenu();
 					break;
 				case 1: //Show events
+					new EventController().readAll();
+					break;
 				case 2:
 				default:
 					System.out.println("Invalid Option, please select a possible value.");
@@ -83,9 +89,115 @@ public class ViewCLI {
 					text.printMenu();
 					break;
 				case 1: //events
+					this.text.printCRUD("events");
+					eventsCRUD();
 				case 2: //sessions
+					this.text.printCRUD("sessions");
 				case 3: //rooms
+					this.text.printCRUD("rooms");
 				case 4: //users
+					usersChoice();
+				default:
+					System.out.println("Invalid Option, please select a possible value.");
+					break;
+			}
+		}
+	}
+
+	private void usersChoice(){
+		boolean loop = true;
+		System.out.println("==============================");
+		System.out.println("1 - Participants");
+		System.out.println("2 - Speakers");
+		System.out.println("0 - Back");
+		System.out.println("==============================");
+		while(loop){
+			int choice = prompt();
+
+			switch (choice){
+				case 0:
+					loop = false;
+					break;
+				case 1: // C
+					this.text.printCRUD("participants");
+				case 2: // R
+					this.text.printCRUD("speakers");
+				default:
+					System.out.println("Invalid Option, please select a possible value.");
+					break;
+			}
+		}
+	}
+
+	private void participantCRUD(){
+		boolean loop = true;
+		while(loop){
+			int choice = prompt();
+
+			switch (choice){
+				case 0:
+					loop = false;
+					break;
+				case 1: // C
+					new ParticipantController().createParticipant();
+					break;
+				case 2: // R
+					new ParticipantController().showAllParticipants();
+					break;
+				case 3: // U
+					new ParticipantController().updateParticipant();
+					break;
+				case 4: // D
+					new ParticipantController().deleteParticipant();
+					break;
+				default:
+					System.out.println("Invalid Option, please select a possible value.");
+					break;
+			}
+		}
+	}
+
+	private void eventsCRUD(){
+		boolean loop = true;
+		while(loop){
+			int choice = prompt();
+
+			switch (choice){
+				case 0:
+					loop = false;
+					break;
+				case 1: // C
+					break;
+				case 2: // R
+					break;
+				case 3: // U
+					break;
+				case 4: // D
+					break;
+				default:
+					System.out.println("Invalid Option, please select a possible value.");
+					break;
+			}
+		}
+	}
+
+	private void baseChoice(){
+		boolean loop = true;
+		while(loop){
+			int choice = prompt();
+
+			switch (choice){
+				case 0:
+					loop = false;
+					break;
+				case 1: // C
+					break;
+				case 2: // R
+					break;
+				case 3: // U
+					break;
+				case 4: // D
+					break;
 				default:
 					System.out.println("Invalid Option, please select a possible value.");
 					break;
@@ -105,9 +217,11 @@ public class ViewCLI {
 					text.printMenu();
 					break;
 				case 1:
-					new ParticipantService().search();
+					new ParticipantController().searchParticipant();
+					sc.next();
 					break;
 				case 2: //search speakers
+					new SpeakerController().searchSpeaker();
 				default:
 					System.out.println("Invalid Option, please select a possible value.");
 					break;
