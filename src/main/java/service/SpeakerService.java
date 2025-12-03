@@ -4,11 +4,11 @@ import dao.SpeakerDao;
 import model.Speaker;
 
 import java.util.List;
-import java.util.Objects;
 
-public class SpeakerService {
 
-	private SpeakerDao dao = new SpeakerDao();
+public class SpeakerService implements Service {
+
+	private final SpeakerDao dao = new SpeakerDao();
 
 	public Speaker createSpeaker(String name, String cpf){
 		Speaker speak = new Speaker();
@@ -19,13 +19,24 @@ public class SpeakerService {
 
 	}
 
-	public Speaker searchSpeaker(Speaker speaker ){
+	public void printAllEntries() {
+		List<Speaker> speakerList = dao.searchAll();
+		for (Speaker s : speakerList){
+			System.out.println(s.toString());
+		}
+	}
+
+	public Speaker searchSpeaker(String cpf){
 		List<Speaker> speakers = dao.searchAll();
 		for(Speaker s : speakers){
-			if(Objects.equals(s.getCpf(), speaker.getCpf())){
+			if(cpf.equals(s.getCpf())){
 				return s;
 			}
 		}
 		return null;
+	}
+
+	public Speaker searchSpeaker(Speaker speaker){
+		return dao.searchBy(speaker.getId());
 	}
 }

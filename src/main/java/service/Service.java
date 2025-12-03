@@ -1,4 +1,5 @@
 package service;
 
-public class Service {
+public abstract interface Service {
+	public abstract void printAllEntries();
 }

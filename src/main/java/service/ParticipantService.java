@@ -11,19 +11,37 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class ParticipantService {
+public class ParticipantService implements Service{
 
-	private Scanner sc = new Scanner(System.in);
+	private final ParticipantDao dao = new ParticipantDao();
 
 	public Participant createParticipant(String nome, String cpf){
 		Participant participant = new Participant();
 		participant.setNome(nome);
 		participant.setCpf(cpf);
-		ParticipantDao dao = new ParticipantDao();
 		dao.insert(participant);
 		return participant;
 	}
 
+	public void updateParticipant(String cpf, String newName){
+		Participant part = searchParticipantByCpf(cpf);
+		assert part != null;
+		part.setNome(newName);
+		dao.update(part);
+	}
+
+	public void removeParticipant(String cpf){
+		Participant part = searchParticipantByCpf(cpf);
+		dao.delete(part);
+	}
+
+	@Override
+	public void printAllEntries() {
+		List<Participant> participantList = dao.searchAll();
+		for (Participant p : participantList){
+			System.out.println(p.toString());
+		}
+	}
 
 	public Participant setPastEntries(Participant part){
 		List<Session> sessionsRegistered = new SessionService().getAllSessionsWPart(part);
@@ -39,11 +57,14 @@ public class ParticipantService {
 		return part;
 	}
 
-	public void search(){
-		String cpf = sc.nextLine();
+	public Participant search(String cpf){
 
-		searchParticipantByCpf(cpf);
+		return searchParticipantByCpf(cpf);
 
+	}
+
+	public Participant search(long id){
+		return dao.searchBy(id);
 	}
 
 
