@@ -16,8 +16,10 @@ public class RegistryService implements Service{
 	public Registry createRegistry(Session session, Participant participant){
 
 		Registry reg = new Registry();
-
-
+		reg.setSession(session);
+		reg.setParticipant(participant);
+		dao.insert(reg);
+		return reg;
 	}
 
 	@Override
