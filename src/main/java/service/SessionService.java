@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SessionService {
+public class SessionService implements Service{
 
-	private SessionDao dao = new SessionDao();
+	private final SessionDao dao = new SessionDao();
 
 	public Session createSession(Room room, Date startDate, Date startTime, Date endTime){
 		Session session = new Session();
@@ -27,6 +27,14 @@ public class SessionService {
 
 	public void confirmPresence(Registry registry, Session session){
 		session.getParticipants().add(registry);
+	}
+
+	@Override
+	public void printAllEntries() {
+		List<Session> sessionList = dao.searchAll();
+		for(Session s : sessionList){
+			System.out.println(s.toString());
+		}
 	}
 
 	public DateInterval getSessionTimeInterval(Session session){

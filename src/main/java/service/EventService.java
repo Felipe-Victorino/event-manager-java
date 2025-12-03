@@ -1,40 +1,22 @@
 package service;
 
-import com.sun.xml.fastinfoset.stax.events.EventBase;
+
 import dao.EventDao;
 import model.Event;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
-public class EventService {
+public class EventService implements Service{
 
-	EventDao dao = new EventDao();
-	Scanner sc = new Scanner(System.in);
+	private final EventDao dao = new EventDao();
 
-	public void createEvent() throws ParseException {
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.print("Insert Event Name: ");
-		String name = sc.nextLine();
-		sc.next();
-
-		System.out.println("Format: yyyy-MM-dd");
-		System.out.print("Insert Event Start Date: ");
-		String dateStart = sc.nextLine();
-		sc.next();
-
-		Date start = formatter.parse(dateStart);
-
-		System.out.print("Insert Event End Date: ");
-		String dateEnd = sc.nextLine();
-		sc.next();
-
-		Date end = formatter.parse(dateEnd);
-
-		createEvent(name, start, end);
+	public Event updateEventName(Event event, String name){
+		event.setName(name);
+		this.dao.update(event);
+		return event;
 	}
 
 	public Event createEvent(String name, Date start, Date end){
@@ -43,7 +25,40 @@ public class EventService {
 		event.setStartDate(start);
 		event.setEndDate(end);
 
-		dao.insert(event);
+		this.dao.insert(event);
 		return event;
+	}
+
+	public void printAllEntries() {
+		List<Event> eventList = this.dao.searchAll();
+		for(Event e : eventList){
+			System.out.println(e.toString());
+		}
+	}
+
+	public void printAllEventsWithName(String name){
+		List<Event> eventList = searchEventByName(name);
+		for(Event e : eventList){
+			System.out.println(e.toString());
+		}
+	}
+
+	public void deleteEvent(Event event){
+		this.dao.delete(event);
+	}
+
+	public List<Event> searchEventByName(String name){
+		List<Event> eventList = this.dao.searchAll();
+		List<Event> finalList = new ArrayList<>();
+		for(Event e : eventList){
+			if(e.getName().contains(name)){
+				finalList.add(e);
+			}
+		}
+		return finalList;
+	}
+
+	public Event searchEventByID(long id){
+		return this.dao.searchBy(id);
 	}
 }

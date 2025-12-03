@@ -33,8 +33,8 @@ public class Room {
 
 	@Override
 	public String toString(){
-		return getName() + '\n' +
-				getDescription() + '\n' +
+		return getName() + " | " +
+				getDescription() + " | " +
 				getMaxCapacity();
 	}
 

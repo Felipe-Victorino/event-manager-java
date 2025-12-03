@@ -9,9 +9,24 @@ import util.interval.DateInterval;
 
 import java.util.List;
 
-public class RegistryService {
+public class RegistryService implements Service{
 
-	private RegistryDao dao = new RegistryDao();
+	private final RegistryDao dao = new RegistryDao();
+
+	public Registry createRegistry(Session session, Participant participant){
+
+		Registry reg = new Registry();
+
+
+	}
+
+	@Override
+	public void printAllEntries() {
+		List<Registry> registryList = dao.searchAll();
+		for (Registry r : registryList){
+			System.out.println(r.toString());
+		}
+	}
 
 	public void createRegistry(Participant part, Session sess){
 		Registry newReg = new Registry();

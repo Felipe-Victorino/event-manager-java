@@ -28,6 +28,13 @@ public class Registry {
 	@JoinColumn(name = "feedback_id")
 	private Feedback feedback;
 
+	public String toString(){
+		return getId() + " | " +
+				getParticipant().getId() + " | " +
+				getSession().getId() + " | " +
+				getFeedback().getId() + " | ";
+	}
+
 
 	public long getId() {return this.id;}
 	public Participant getParticipant() {return this.participant;}

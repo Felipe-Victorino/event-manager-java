@@ -8,6 +8,16 @@ public class DisplayText {
 		System.out.println("==============================");
 	}
 
+	protected void printCRUD(String title){
+		System.out.println("==============================");
+		System.out.println("1 - Create " + title);
+		System.out.println("2 - See all " + title);
+		System.out.println("3 - Update " + title);
+		System.out.println("4 - Delete " + title);
+		System.out.println("0 - Back");
+		System.out.println("==============================");
+	}
+
 	protected void printMenu(){
 		System.out.println("==============================");
 		System.out.println("1 - Users");
