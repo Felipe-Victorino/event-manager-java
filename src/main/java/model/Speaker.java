@@ -16,8 +16,9 @@ public class Speaker extends Person{
 
 	@Override
 	public String toString(){
-		return getNome() + '\n' +
-				getCpf() + '\n';
+		return getId() + " | " +
+				getNome() + " | " +
+				getCpf() + " | ";
 	}
 
     public long getId() {return this.id;}

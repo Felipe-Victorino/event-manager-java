@@ -36,18 +36,17 @@ public class Session {
 
 	private int predictedCapacity;
 
-	int totalScore;
-
-	double finalScore;
+	private int totalScore;
 
 	@OneToMany(mappedBy = "session")
-	private List<Registry> participants;
+	private List<Registry> registries;
+
+	@OneToMany(mappedBy = "session")
+	private List<Speaker> speaker;
 
     public Session(){}
 
     public long getId(){return this.id;}
-    public Date getDate(){return this.date;}
-    public Room getRoom(){return this.room;}
     public void setDate(Date date){this.date = date;}
 	public Date getEndTime() { return endTime;}
 	public void setEndTime(Date endTime) {this.endTime = endTime;}
@@ -58,11 +57,10 @@ public class Session {
 	public int getPredictedCapacity() {
 		return predictedCapacity;
 	}
-
 	public void setPredictedCapacity(int predictedCapacity) {
 		this.predictedCapacity = predictedCapacity;
 	}
 
-	public List<Registry> getParticipants() {return participants;}
-	public void setParticipants(List<Registry> participants) {this.participants = participants;}
+	public List<Registry> getParticipants() {return registries;}
+	public void setParticipants(List<Registry> registries) {this.registries = registries;}
 }

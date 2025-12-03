@@ -21,6 +21,7 @@ public class Participant extends Person {
     private long id;
 
 	@Transient //Contrário de persistente, não é colocado no banco de dados
+	// estou com a impressão que esse não é o melhor lugar pra arvore
 	private DateIntervalTree intervalTree;
 
 
@@ -30,14 +31,15 @@ public class Participant extends Person {
 
 	@Override
 	public String toString(){
-		return getNome() + '\n' +
-				getCpf() + '\n';
+		return getNome() + " | " +
+				getCpf() + " | ";
 	}
 
     public long getId(){ return this.id;}
     public String getNome(){return this.name;}
     public String getCpf(){return this.cpf;}
 	public DateIntervalTree getIntervalTree(){return this.intervalTree;}
+	public void setIntervalTree(DateIntervalTree tree){this.intervalTree = tree;}
 
     public void setNome(String nome){this.name = nome;}
     public void setCpf(String cpf){this.cpf = cpf;}
