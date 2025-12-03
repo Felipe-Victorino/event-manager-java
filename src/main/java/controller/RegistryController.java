@@ -2,7 +2,9 @@ package controller;
 
 import service.RegistryService;
 
-public class RegistryController {
+public class RegistryController extends Controller<RegistryService> {
 
-	RegistryService service = new RegistryService();
+	public RegistryController(){
+		super(new RegistryService());
+	}
 }

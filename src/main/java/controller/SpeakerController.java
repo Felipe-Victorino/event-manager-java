@@ -11,6 +11,6 @@ public class SpeakerController extends Controller<SpeakerService> {
 		System.out.println("Search speaker, insert their cpf");
 		System.out.print("CPF: ");
 		String cpf = sc.nextLine();
-		new SpeakerService().searchSpeaker(cpf);
+		this.service.searchSpeaker(cpf);
 	}
 }
