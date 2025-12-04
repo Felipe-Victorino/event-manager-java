@@ -5,55 +5,45 @@ import service.EventService;
 
 import java.util.Date;
 
-public class EventController extends Controller<EventService>{
+public class EventController extends Controller<EventService, Event>{
 
 	public EventController(){
 		super(new EventService());
 	}
 
 	public void create(){
-		createEvent();
-	}
-
-	public void update() {
-		updateEvent();
-	}
-
-	public void readAll() {
-		showAllEvents();
-	}
-
-	public void delete() {
-		deleteEvent();
-	}
-
-	public void createEvent(){
 		String name = sc.nextLine();
 		Date start = parseDate();
 		Date end = parseDate();
 
-		this.service.createEvent(name, start, end);
+		this.service.create(name, start, end);
 	}
 
-	public void showAllEvents(){
+	public void readAll(){
 		this.service.printAllEntries();
 	}
 
-	public void searchEvent(){
+	public void search(){
 		String name = sc.nextLine();
 		this.service.printAllEventsWithName(name);
 	}
-	public void updateEvent(){
-		String name = sc.nextLine();
+
+	public Event searchById() {
 		long id = sc.nextLong();
-		Event event = this.service.searchEventByID(id);
-		this.service.updateEventName(event, name);
+		return this.service.search(id);
 	}
 
-	public void deleteEvent(){
+	public void update(){
+		String name = sc.nextLine();
 		long id = sc.nextLong();
-		Event event = this.service.searchEventByID(id);
+		Event event = this.service.search(id);
+		this.service.update(event, name);
+	}
 
-		this.service.deleteEvent(event);
+	public void delete(){
+		long id = sc.nextLong();
+		Event event = this.service.search(id);
+
+		this.service.delete(event);
 	}
 }

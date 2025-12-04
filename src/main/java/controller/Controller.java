@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public abstract class Controller<T> {
+public abstract class Controller<T, E> implements ControllerInterface<E>{
 
 	protected T service;
 	protected Scanner sc = new Scanner(System.in);
@@ -12,6 +12,12 @@ public abstract class Controller<T> {
 	public Controller(T service) {
 		this.service = service;
 	}
+
+	public abstract void create();
+	public abstract void readAll();
+	public abstract void update();
+	public abstract void delete();
+	public abstract E searchById();
 
 	private int getMonth(int month){
 		switch(month){
@@ -57,9 +63,16 @@ public abstract class Controller<T> {
 		return calendar.getTime();
 	}
 
-	public abstract void create();
-	public abstract void readAll();
-	public abstract void update();
-	public abstract void delete();
+	@SuppressWarnings("deprecation")
+	protected Date parseTime(Date date){
+		System.out.print("Hours: ");
+		int hour = sc.nextInt();
+		System.out.print("Minutes: ");
+		int minute = sc.nextInt();
+
+		date.setHours(hour);
+		date.setMinutes(minute);
+		return date;
+	}
 
 }

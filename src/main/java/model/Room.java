@@ -1,17 +1,10 @@
 package model;
 
-
-
-import util.interval.DateIntervalTree;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import javax.persistence.GenerationType;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "room")
@@ -27,9 +20,13 @@ public class Room {
 
     private int maxCapacity;
 
-    public Room(){
+    public Room(){}
 
-    }
+	public Room(String name, String description, int capacity){
+		this.name = name;
+		this.description = description;
+		this.maxCapacity = capacity;
+	}
 
 	@Override
 	public String toString(){

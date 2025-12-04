@@ -19,35 +19,35 @@ public class ParticipantService implements Service{
 		Participant participant = new Participant();
 		participant.setNome(nome);
 		participant.setCpf(cpf);
-		dao.insert(participant);
+		this.dao.insert(participant);
 		return participant;
 	}
 
-	public void updateParticipant(String cpf, String newName){
-		Participant part = searchParticipantByCpf(cpf);
+	public void updateParticipant(Participant part, String cpf, String newName){
 		assert part != null;
 		part.setNome(newName);
-		dao.update(part);
+		part.setCpf(cpf);
+		this.dao.update(part);
 	}
 
 	public void removeParticipant(String cpf){
 		Participant part = searchParticipantByCpf(cpf);
-		dao.delete(part);
+		this.dao.delete(part);
 	}
 
-	@Override
 	public void printAllEntries() {
-		List<Participant> participantList = dao.searchAll();
+		List<Participant> participantList = this.dao.searchAll();
 		for (Participant p : participantList){
 			System.out.println(p.toString());
 		}
 	}
 
 	public Participant setPastEntries(Participant part){
-		List<Session> sessionsRegistered = new SessionService().getAllSessionsWPart(part);
+		SessionService sessionServer = new SessionService();
+		List<Session> sessionsRegistered = sessionServer.getAllSessionsWPart(part);
 		try {
 			for (Session s : sessionsRegistered) {
-				DateInterval interval = new SessionService().getSessionTimeInterval(s);
+				DateInterval interval = sessionServer.getSessionTimeInterval(s);
 				part.getIntervalTree().add(interval);
 			}
 		} catch (IntervalTreeOverlap e) {

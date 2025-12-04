@@ -11,17 +11,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SessionService implements Service{
+public class SessionService implements Service<Session>{
 
 	private final SessionDao dao = new SessionDao();
 
-	public Session createSession(Room room, Date startDate, Date startTime, Date endTime){
+	public Session create(Room room, Date startDate, Date startTime, Date endTime){
 		Session session = new Session();
 		session.setDate(startDate);
 		session.setStartTime(startTime);
 		session.setEndTime(endTime);
 		session.setRoom(room);
-		session.setParticipants(new ArrayList<Registry>());
+		session.setParticipants(new ArrayList<>());
+		dao.insert(session);
 		return session;
 	}
 
@@ -41,6 +42,21 @@ public class SessionService implements Service{
 		return new DateInterval(session.getStartTime(), session.getEndTime());
 	}
 
+	public Session search(long id){
+		return this.dao.searchBy(id);
+	}
+
+	public List<Session> searchAllSessionsByDate(Date date){
+		List<Session> sessionList = this.dao.searchAll();
+		List<Session> sessionsOnDate = new ArrayList<>();
+		for (Session s : sessionList){
+			if (date.equals(s.getDate())){
+				sessionsOnDate.add(s);
+			}
+		}
+		return sessionsOnDate;
+	}
+
 	public List<Session> getAllSessionsWPart(Participant participant){
 		List<Session> thisPartList = new ArrayList<>();
 		for(Session s : getAllSessions()){
@@ -54,6 +70,6 @@ public class SessionService implements Service{
 	}
 
 	public List<Session> getAllSessions(){
-		return dao.searchAll();
+		return this.dao.searchAll();
 	}
 }

@@ -139,16 +139,16 @@ public class ViewCLI {
 					loop = false;
 					break;
 				case 1: // C
-					new ParticipantController().createParticipant();
+					new ParticipantController().create();
 					break;
 				case 2: // R
-					new ParticipantController().showAllParticipants();
+					new ParticipantController().readAll();
 					break;
 				case 3: // U
-					new ParticipantController().updateParticipant();
+					new ParticipantController().update();
 					break;
 				case 4: // D
-					new ParticipantController().deleteParticipant();
+					new ParticipantController().delete();
 					break;
 				default:
 					System.out.println("Invalid Option, please select a possible value.");
@@ -217,11 +217,11 @@ public class ViewCLI {
 					text.printMenu();
 					break;
 				case 1:
-					new ParticipantController().searchParticipant();
+					new ParticipantController().search();
 					sc.next();
 					break;
 				case 2: //search speakers
-					new SpeakerController().searchSpeaker();
+					new SpeakerController().searchByCpf();
 				default:
 					System.out.println("Invalid Option, please select a possible value.");
 					break;

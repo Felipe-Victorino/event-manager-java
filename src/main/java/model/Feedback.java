@@ -30,6 +30,13 @@ public class Feedback {
 
 	}
 
+	public Feedback(int finalCapacity, int predictedCapacity, double score, Session sess){
+		this.finalCapacity = finalCapacity;
+		this.predictedCapacity = predictedCapacity;
+		this.score = score;
+		this.session = sess;
+	}
+
 	public long getId() {
 		return id;
 	}

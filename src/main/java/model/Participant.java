@@ -16,10 +16,6 @@ import javax.persistence.Transient;
 @Table (name = "participant")
 public class Participant extends Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
 	@Transient //Contrário de persistente, não é colocado no banco de dados
 	// estou com a impressão que esse não é o melhor lugar pra arvore
 	private DateIntervalTree intervalTree;
@@ -27,6 +23,10 @@ public class Participant extends Person {
 
 	public Participant(){
 
+	}
+
+	public Participant(String name, String cpf){
+		super(name, cpf);
 	}
 
 	@Override
