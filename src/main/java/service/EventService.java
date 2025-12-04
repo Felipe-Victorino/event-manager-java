@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class EventService implements Service{
+public class EventService implements Service<Event>{
 
 	private final EventDao dao = new EventDao();
 
@@ -58,7 +58,7 @@ public class EventService implements Service{
 		return finalList;
 	}
 
-	public Event searchEventByID(long id){
+	public Event search(long id){
 		return this.dao.searchBy(id);
 	}
 }

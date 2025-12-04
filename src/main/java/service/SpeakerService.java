@@ -1,12 +1,13 @@
 package service;
 
 import dao.SpeakerDao;
+import model.Participant;
 import model.Speaker;
 
 import java.util.List;
 
 
-public class SpeakerService implements Service {
+public class SpeakerService implements Service<Speaker> {
 
 	private final SpeakerDao dao = new SpeakerDao();
 
@@ -17,6 +18,13 @@ public class SpeakerService implements Service {
 		dao.insert(speak);
 		return speak;
 
+	}
+
+	public void updateSpeaker(Speaker speaker, String cpf, String newName){
+		assert speaker != null;
+		speaker.setNome(newName);
+		speaker.setCpf(cpf);
+		this.dao.update(speaker);
 	}
 
 	public void printAllEntries() {
@@ -34,6 +42,10 @@ public class SpeakerService implements Service {
 			}
 		}
 		return null;
+	}
+
+	public Speaker search(long id){
+		return dao.searchBy(id);
 	}
 
 	public Speaker searchSpeaker(Speaker speaker){

@@ -2,11 +2,12 @@ package service;
 
 import dao.FeedbackDao;
 import model.Feedback;
+import model.Registry;
 import model.Session;
 
 import java.util.List;
 
-public class FeedbackService implements Service{
+public class FeedbackService implements Service<Feedback>{
 
 	private final FeedbackDao dao = new FeedbackDao();
 
@@ -25,6 +26,10 @@ public class FeedbackService implements Service{
 		for (Feedback f : feedbackList){
 			System.out.println(f.toString());
 		}
+	}
+
+	public Feedback search(long id) {
+		return this.dao.searchBy(id);
 	}
 
 	public double calculateScore(Feedback feedback){

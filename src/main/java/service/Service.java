@@ -1,5 +1,7 @@
 package service;
 
-public abstract interface Service {
-	public abstract void printAllEntries();
+public interface Service<T> {
+
+	public T search(long id);
+	public void printAllEntries();
 }

@@ -5,18 +5,16 @@ import model.Room;
 
 import java.util.List;
 
-public class RoomService implements Service{
+public class RoomService implements Service<Room>{
 
 	private final RoomDao dao = new RoomDao();
 
-	public void addNewRoom(Room room){
-		dao.insert(room);
-	}
 	public Room createRoom(String name, String description, int capacity){
 		Room room = new Room();
 		room.setName(name);
 		room.setDescription(description);
 		room.setMaxCapacity(capacity);
+		dao.insert(room);
 		return room;
 	}
 
@@ -40,5 +38,12 @@ public class RoomService implements Service{
 			}
 		}
 		return null;
+	}
+
+	public Room update(Room room, String name, String desc, int capacity){
+		room.setName(name);
+		room.setDescription(desc);
+		room.setMaxCapacity(capacity);
+		return this.dao.update(room);
 	}
 }
