@@ -1,25 +1,23 @@
 package service;
 
-
 import dao.EventDao;
 import model.Event;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
-public class EventService implements Service{
+public class EventService implements Service<Event>{
 
 	private final EventDao dao = new EventDao();
 
-	public Event updateEventName(Event event, String name){
+	public Event update(Event event, String name){
 		event.setName(name);
 		this.dao.update(event);
 		return event;
 	}
 
-	public Event createEvent(String name, Date start, Date end){
+	public Event create(String name, Date start, Date end){
 		Event event = new Event();
 		event.setName(name);
 		event.setStartDate(start);
@@ -43,8 +41,8 @@ public class EventService implements Service{
 		}
 	}
 
-	public void deleteEvent(Event event){
-		this.dao.delete(event);
+	public Event delete(Event event){
+		return this.dao.delete(event);
 	}
 
 	public List<Event> searchEventByName(String name){
@@ -58,7 +56,7 @@ public class EventService implements Service{
 		return finalList;
 	}
 
-	public Event searchEventByID(long id){
+	public Event search(long id){
 		return this.dao.searchBy(id);
 	}
 }

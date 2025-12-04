@@ -46,10 +46,28 @@ public class Session {
 
     public Session(){}
 
+	public Session(Date date, Date start, Date end, Room room, int capacity){
+		this.date = date;
+		this.startTime = start;
+		this.endTime = end;
+		this.room = room;
+		this.predictedCapacity = capacity;
+	}
+
     public long getId(){return this.id;}
-    public void setDate(Date date){this.date = date;}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date){this.date = date;}
 	public Date getEndTime() { return endTime;}
 	public void setEndTime(Date endTime) {this.endTime = endTime;}
+
+	public Room getRoom() {
+		return room;
+	}
+
 	public void setRoom(Room room){this.room = room;}
 	public Date getStartTime() {return startTime;}
 	public void setStartTime(Date startTime) {this.startTime = startTime;}

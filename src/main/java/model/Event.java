@@ -16,15 +16,22 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "event_id")
-	long id;
+	private long id;
 
-	String name;
+	private String name;
 
 	@Temporal(TemporalType.DATE)
-	Date startDate;
+	private Date startDate;
 	@Temporal(TemporalType.DATE)
-	Date endDate;
+	private Date endDate;
 
+	public Event(){}
+
+	public Event(String name, Date start, Date end){
+		this.name = name;
+		this.startDate = start;
+		this.endDate = end;
+	}
 
 	@Override
 	public String toString(){

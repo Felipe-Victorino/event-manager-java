@@ -1,30 +1,15 @@
 package controller;
 
+import model.Participant;
 import service.ParticipantService;
 
-public class ParticipantController extends Controller<ParticipantService> {
+public class ParticipantController extends Controller<ParticipantService, Participant> {
 
 	public ParticipantController(){
 		super(new ParticipantService());
 	}
 
 	public void create(){
-		createParticipant();
-	}
-
-	public void readAll(){
-		showAllParticipants();
-	}
-
-	public void update(){
-		updateParticipant();
-	}
-
-	public void delete(){
-		deleteParticipant();
-	}
-
-	public void createParticipant(){
 		System.out.println("New Participant, insert the data in the following inputs: ");
 		System.out.print("Name: ");
 		String name = sc.nextLine();
@@ -34,25 +19,31 @@ public class ParticipantController extends Controller<ParticipantService> {
 		this.service.createParticipant(name, cpf);
 	}
 
-	public void showAllParticipants(){
+	public void readAll(){
 		this.service.printAllEntries();
 	}
 
-	public void updateParticipant(){
+	public void update(){
+		Participant part = searchById();
 		String cpf = this.sc.nextLine();
 		String name = this.sc.nextLine();
-		this.service.updateParticipant(cpf, name);
+		this.service.updateParticipant(part, cpf, name);
 	}
 
-	public void deleteParticipant(){
+	public void delete(){
 		String cpf = this.sc.nextLine();
 		this.service.removeParticipant(cpf);
 	}
 
-	public void searchParticipant(){
+	public Participant search(){
 		System.out.println("Search Participant, insert their cpf");
 		System.out.print("CPF: ");
 		String cpf = sc.nextLine();
-		this.service.search(cpf);
+		return this.service.search(cpf);
+	}
+
+	public Participant searchById(){
+		long id = sc.nextLong();
+		return this.service.search(id);
 	}
 }
