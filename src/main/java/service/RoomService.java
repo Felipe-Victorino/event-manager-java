@@ -9,6 +9,10 @@ public class RoomService implements Service<Room>{
 
 	private final RoomDao dao = new RoomDao();
 
+	public Room create(Room room){
+		return createRoom(room.getName(), room.getDescription(), room.getMaxCapacity());
+	}
+
 	public Room createRoom(String name, String description, int capacity){
 		Room room = new Room();
 		room.setName(name);
@@ -45,5 +49,9 @@ public class RoomService implements Service<Room>{
 		room.setDescription(desc);
 		room.setMaxCapacity(capacity);
 		return this.dao.update(room);
+	}
+
+	public Room delete(Room room) {
+		return this.dao.delete(room);
 	}
 }
