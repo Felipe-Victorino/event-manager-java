@@ -15,7 +15,7 @@ public class SessionService implements Service<Session>{
 
 	private final SessionDao dao = new SessionDao();
 
-	public Session createSession(Room room, Date startDate, Date startTime, Date endTime){
+	public Session create(Room room, Date startDate, Date startTime, Date endTime){
 		Session session = new Session();
 		session.setDate(startDate);
 		session.setStartTime(startTime);

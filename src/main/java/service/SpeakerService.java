@@ -1,7 +1,6 @@
 package service;
 
 import dao.SpeakerDao;
-import model.Participant;
 import model.Speaker;
 
 import java.util.List;
@@ -11,7 +10,7 @@ public class SpeakerService implements Service<Speaker> {
 
 	private final SpeakerDao dao = new SpeakerDao();
 
-	public Speaker createSpeaker(String name, String cpf){
+	public Speaker create(String name, String cpf){
 		Speaker speak = new Speaker();
 		speak.setNome(name);
 		speak.setCpf(cpf);
@@ -20,11 +19,15 @@ public class SpeakerService implements Service<Speaker> {
 
 	}
 
-	public void updateSpeaker(Speaker speaker, String cpf, String newName){
+	public void update(Speaker speaker, String cpf, String newName){
 		assert speaker != null;
 		speaker.setNome(newName);
 		speaker.setCpf(cpf);
 		this.dao.update(speaker);
+	}
+
+	public Speaker delete(Speaker speak){
+		return this.dao.delete(speak);
 	}
 
 	public void printAllEntries() {
@@ -48,7 +51,5 @@ public class SpeakerService implements Service<Speaker> {
 		return dao.searchBy(id);
 	}
 
-	public Speaker searchSpeaker(Speaker speaker){
-		return dao.searchBy(speaker.getId());
-	}
+
 }
