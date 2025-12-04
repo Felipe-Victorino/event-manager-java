@@ -19,5 +19,14 @@ public abstract class Person {
 	protected String name;
 	protected String cpf;
 
+	public Person(){
+
+	}
+
+	public Person(String name, String cpf){
+		this.name = name;
+		this.cpf = cpf;
+	}
+
 	abstract public String toString();
 }

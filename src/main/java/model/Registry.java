@@ -24,6 +24,12 @@ public class Registry {
 	@JoinColumn(name = "session_id")
 	private Session session;
 
+	public Registry(){}
+
+	public Registry(Participant part, Session sess){
+		this.participant =part;
+		this.session = sess;
+	}
 
 	public String toString(){
 		return getId() + " | " +

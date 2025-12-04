@@ -25,6 +25,13 @@ public class Event {
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
 
+	public Event(){}
+
+	public Event(String name, Date start, Date end){
+		this.name = name;
+		this.startDate = start;
+		this.endDate = end;
+	}
 
 	@Override
 	public String toString(){

@@ -20,9 +20,13 @@ public class Room {
 
     private int maxCapacity;
 
-    public Room(){
+    public Room(){}
 
-    }
+	public Room(String name, String description, int capacity){
+		this.name = name;
+		this.description = description;
+		this.maxCapacity = capacity;
+	}
 
 	@Override
 	public String toString(){

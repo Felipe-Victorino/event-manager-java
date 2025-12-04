@@ -46,6 +46,14 @@ public class Session {
 
     public Session(){}
 
+	public Session(Date date, Date start, Date end, Room room, int capacity){
+		this.date = date;
+		this.startTime = start;
+		this.endTime = end;
+		this.room = room;
+		this.predictedCapacity = capacity;
+	}
+
     public long getId(){return this.id;}
 
 	public Date getDate() {

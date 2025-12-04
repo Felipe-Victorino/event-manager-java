@@ -14,6 +14,10 @@ public class Speaker extends Person{
 
     }
 
+	public Speaker(String nome, String cpf){
+		super(nome, cpf);
+	}
+
 	@Override
 	public String toString(){
 		return getId() + " | " +
