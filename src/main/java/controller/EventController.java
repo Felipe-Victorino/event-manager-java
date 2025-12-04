@@ -16,7 +16,7 @@ public class EventController extends Controller<EventService, Event>{
 		Date start = parseDate();
 		Date end = parseDate();
 
-		this.service.createEvent(name, start, end);
+		this.service.create(name, start, end);
 	}
 
 	public void readAll(){
@@ -37,13 +37,13 @@ public class EventController extends Controller<EventService, Event>{
 		String name = sc.nextLine();
 		long id = sc.nextLong();
 		Event event = this.service.search(id);
-		this.service.updateEventName(event, name);
+		this.service.update(event, name);
 	}
 
 	public void delete(){
 		long id = sc.nextLong();
 		Event event = this.service.search(id);
 
-		this.service.deleteEvent(event);
+		this.service.delete(event);
 	}
 }

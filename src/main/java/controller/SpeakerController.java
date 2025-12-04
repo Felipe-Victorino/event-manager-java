@@ -16,18 +16,18 @@ public class SpeakerController extends Controller<SpeakerService, Speaker> {
 		String cpf = sc.nextLine();
 		sc.nextLine();
 
-		this.service.createSpeaker(name, cpf);
+		this.service.create(name, cpf);
 	}
 
 	public void readAll() {
 		this.service.printAllEntries();
 	}
 
-	public void searchByCpf(){
+	public Speaker searchByCpf(){
 		System.out.println("Search speaker, insert their cpf");
 		System.out.print("CPF: ");
 		String cpf = sc.nextLine();
-		this.service.searchSpeaker(cpf);
+		return this.service.searchSpeaker(cpf);
 	}
 
 	public Speaker searchById(){
@@ -36,13 +36,14 @@ public class SpeakerController extends Controller<SpeakerService, Speaker> {
 	}
 
 	public void update() {
-		Speaker speak = searchById();
+		Speaker speak = searchByCpf();
 		String cpf = this.sc.nextLine();
 		String name = this.sc.nextLine();
-		this.service.updateSpeaker(speak, cpf, name);
+		this.service.update(speak, cpf, name);
 	}
 
 	public void delete() {
-
+		Speaker speak = searchByCpf();
+		this.service.delete(speak);
 	}
 }

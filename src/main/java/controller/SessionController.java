@@ -18,7 +18,7 @@ public class SessionController extends Controller<SessionService, Session> {
 		Date day = this.parseDate();
 		Date start = this.parseTime(day);
 		Date end = this.parseTime(day);
-		this.service.createSession(room, day, start, end);
+		this.service.create(room, day, start, end);
 	}
 
 	public void readAll(){
