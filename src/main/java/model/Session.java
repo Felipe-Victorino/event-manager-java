@@ -47,9 +47,19 @@ public class Session {
     public Session(){}
 
     public long getId(){return this.id;}
-    public void setDate(Date date){this.date = date;}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date){this.date = date;}
 	public Date getEndTime() { return endTime;}
 	public void setEndTime(Date endTime) {this.endTime = endTime;}
+
+	public Room getRoom() {
+		return room;
+	}
+
 	public void setRoom(Room room){this.room = room;}
 	public Date getStartTime() {return startTime;}
 	public void setStartTime(Date startTime) {this.startTime = startTime;}

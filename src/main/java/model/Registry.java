@@ -24,24 +24,18 @@ public class Registry {
 	@JoinColumn(name = "session_id")
 	private Session session;
 
-	@OneToOne
-	@JoinColumn(name = "feedback_id")
-	private Feedback feedback;
 
 	public String toString(){
 		return getId() + " | " +
 				getParticipant().getId() + " | " +
-				getSession().getId() + " | " +
-				getFeedback().getId() + " | ";
+				getSession().getId();
 	}
 
 
 	public long getId() {return this.id;}
 	public Participant getParticipant() {return this.participant;}
 	public Session getSession() {return this.session;}
-	public Feedback getFeedback(){return this.feedback;}
 
 	public void setParticipant(Participant participant) {this.participant = participant;}
 	public void setSession(Session session) {this.session = session;}
-	public void setFeedback(Feedback feedback) {this.feedback = feedback;}
 }
