@@ -19,26 +19,29 @@ public abstract class Dao<T> implements InterfaceDao<T>{
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
-	public void insert(T t){
+	public T insert(T t){
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(t);
 		em.getTransaction().commit();
 		em.close();
+		return t;
 	};
-	public void delete(T t){
+	public T delete(T t){
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.remove(t);
 		em.getTransaction().commit();
 		em.close();
+		return t;
 	};
-	public void update(T t){
+	public T update(T t){
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(t);
 		em.getTransaction().commit();
 		em.close();
+		return t;
 	};
 	public T searchBy(long id){
 		EntityManager em = emf.createEntityManager();
